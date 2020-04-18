@@ -5,7 +5,7 @@ Years ago, a dynamic site was built for <https://www.atlanticmma.com>. That site
 To keep that SEO value without having to "keep the site running" on a managed server, this repo:
 
 1. Took a snapshot of the dynamic site using [HTTrack website copier](http://www.httrack.com/)
-2. Pages original at a URL like `/zip/zap` became `/zip/zap.html`. So, to keep a similar "dynamic site URL", copies of `/zip/zap.html` were made at `/zip/zap/index.html` (which properly configured web servers will display when asked for the original `/zip/zap` URL)
+2. Renamed the resulting pages to mimic the dynamic site URL structures. Step 1 took pages originally at a URL like `/zip/zap` and created `/zip/zap.html`. So, to keep a similar "dynamic site URL", copies of `/zip/zap.html` were made at `/zip/zap/index.html`, which properly configured web servers will display when asked for the original `/zip/zap` URL
 3. Updated all links to point to the dynamic-like URLs enabled by step 2.
 
 ## Hosting
