@@ -38,7 +38,7 @@ def convert_files!
     end
 
     old_href = %{href="#{original_filename}"}
-    new_href = %{href="/#{directory_to_create}/"}
+    new_href = %{href="/#{directory_to_create}/"}.gsub("//", "/")
     each_html_file do |fn|
       original_contents = File.read(fn)
       updated_contents = original_contents.gsub(old_href, new_href)
@@ -65,7 +65,6 @@ def convert_refs!
     updated_contents = updated_contents.gsub(%{"assets/}, %{"/assets/})
     updated_contents = updated_contents.gsub(%{"images/}, %{"/images/})
     updated_contents = updated_contents.gsub(%{"index.html}, %{"/index.html})
-    updated_contents = updated_contents.gsub(%{href="./}, %{href="/})
     updated_contents = updated_contents.gsub(%{<script src='http://cdn.goroost.com/roostjs/7bc6889c1b38471c93a34a7a5dbd7e64' async></script>}, "")
     if updated_contents != original_contents
       File.write(filename, updated_contents)
