@@ -10,7 +10,7 @@ def each_html_file
   end
 end
 
-def convert!
+def convert_files!
   created_diretory_count = 0
   created_file_count = 0
   files_written_count = 0
@@ -37,10 +37,11 @@ def convert!
       FileUtils.cp(original_filename, new_index_file)
     end
 
-    new_href = "#{directory_to_create}/"
+    old_href = %{href="#{original_filename}"}
+    new_href = %{href="/#{directory_to_create}/"}
     each_html_file do |fn|
       original_contents = File.read(fn)
-      updated_contents = original_contents.gsub(original_filename, new_href)
+      updated_contents = original_contents.gsub(old_href, new_href)
       if original_contents != updated_contents
         puts "Writing #{fn}"
         files_written_count += 1
@@ -54,4 +55,23 @@ def convert!
   puts "Updated #{files_written_count} files"
 end
 
-convert!
+def convert_refs!
+  each_html_file do |filename|
+    original_contents = File.read(filename)
+    updated_contents = original_contents.gsub(/\.\.[\.\/]*/, "/")
+    updated_contents = updated_contents.gsub(/\.\//, "/")
+    updated_contents = updated_contents.gsub(%{"javascripts/}, %{"/javascripts/})
+    updated_contents = updated_contents.gsub(%{"stylesheets/}, %{"/stylesheets/})
+    updated_contents = updated_contents.gsub(%{"assets/}, %{"/assets/})
+    updated_contents = updated_contents.gsub(%{"images/}, %{"/images/})
+    updated_contents = updated_contents.gsub(%{"index.html}, %{"/index.html})
+    updated_contents = updated_contents.gsub(%{href="./}, %{href="/})
+    updated_contents = updated_contents.gsub(%{<script src='http://cdn.goroost.com/roostjs/7bc6889c1b38471c93a34a7a5dbd7e64' async></script>}, "")
+    if updated_contents != original_contents
+      File.write(filename, updated_contents)
+    end
+  end
+end
+
+convert_files!
+convert_refs!
