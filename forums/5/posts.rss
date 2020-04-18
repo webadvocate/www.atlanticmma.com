@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" version="2.0">
+  <channel>
+    <title>Recent Posts in The MMA Diet | Beast</title>
+    <link>http://www.atlanticmma.com/forums/5/posts</link>
+    <language>en-us</language>
+    <ttl>60</ttl>
+    <atom:link type="application/opensearchdescription+xml" href="http://www.atlanticmma.com/open_search.xml" rel="search"/>
+  </channel>
+</rss>
